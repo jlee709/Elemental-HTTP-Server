@@ -8,23 +8,28 @@
 // read data 
 // sending back 
 // response to serve data and there are methods attached to use on the response 
+
 // *********************************************************************
 
 
-
+//dependent var 
 const http = require('http');
 const fs = require('fs');
+const querystring = require('querystring');
 var port = 8080;
 
 function sayHello(req, res) {
   console.log(req);
+
   // header
   res.writeHead(200, {'Content-Type': 'text/html'});
   
   res.end(); 
 }
-// server start 
 
+
+
+// server start 
 var server = http.createServer(sayHello);
 server.listen(port);
 

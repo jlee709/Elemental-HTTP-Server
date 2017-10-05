@@ -19,13 +19,13 @@ const querystring = require('querystring');
 const port = 8080;
 
 function sayHello(req, res) {
-  console.log(req);
-
+  // console.log(req);
   // header
   res.writeHead(200, {'Content-Type': 'text/html'});
   
   res.end(); 
 }
+
 
 // server start 
 var server = http.createServer(sayHello);

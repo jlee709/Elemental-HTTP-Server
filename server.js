@@ -18,20 +18,44 @@ const fs = require('fs');
 const querystring = require('querystring');
 const port = 8080;
 
-function sayHello(req, res) {
+
+function justinsServer(req, res) {
   // console.log(req);
+
+//needs swtich for all GET PUT POST DELETE 
+
+
+  switch(req.url){
+    case "/index.html":
+      console.log('this is the index');
+      break;
+
+    case "/helium.html":
+      console.log('helium page');
+      break;
+
+    case "/hydrogen.html":
+      console.log('the hydrogen page');
+      break; 
+
+    default:
+      console.log('404 server error jesus christ monkey balls ');
+  } 
+
   // header
+  console.log(req.url);
   res.writeHead(200, {'Content-Type': 'text/html'});
-  
+  res.write('ilikebeer');
   res.end(); 
 }
 
 
+
 // server start 
 var server = http.createServer(sayHello);
-server.listen(port);
+server.listen(port);//port is 8080
 
-console.log('hello' + ':' + port);
+console.log('hello you are plugged into' + ':' + port);
 
 
 

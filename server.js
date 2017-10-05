@@ -12,71 +12,40 @@
 // *********************************************************************
 
 
+//asynch and nde taking data asynchronously 
+//code needds to exectue where the code is asvailable to you 
+// parsing the body after the callb on event understanding at the right pont to acsess data
+
 //dependent var 
 const http = require('http');
 const fs = require('fs');
 const querystring = require('querystring');
 const port = 8080;
+const host = '0.0.0.0';
+const handlers = require('./handlers');
+
+
+http.createServer(justinsServer).listen(port);
 
 
 function justinsServer(req, res) {
   // console.log(req);
 
 //needs swtich for all GET PUT POST DELETE 
-
-
-  switch(req.url){
-    case "/index.html":
-      console.log('this is the index');
+  switch(req.method){
+    case "GET":
+      handlers.getRequest(req, res);
       break;
 
-    case "/helium.html":
-      console.log('helium page');
+    case "POST":
+  //  handelers.postRequest(req, res);
       break;
-
-    case "/hydrogen.html":
-      console.log('the hydrogen page');
-      break; 
 
     default:
       console.log('404 server error jesus christ monkey balls ');
   } 
-
-  // header
-  console.log(req.url);
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  res.write('ilikebeer');
-  res.end(); 
 }
 
 
-
-// server start 
-var server = http.createServer(sayHello);
-server.listen(port);//port is 8080
-
-console.log('hello you are plugged into' + ':' + port);
-
-
-
-
-
-
+// fs.stat(path, callback);  asks for files directories etc
 // watch out for double posting or double puts. updates for those 
-
-
-// ===== W3 examples 
-
-
-
-//w3 example\
-
-// console.log('checking server');
-
-// console.log("We've got a request for " + req.url);
-
-// http.createServer(function (req, res) {
-//   res.writeHead(200, {'Content-Type': 'text/plain'});
-//   res.write('Hello World!');
-//   res.end();
-// }).listen(8080);

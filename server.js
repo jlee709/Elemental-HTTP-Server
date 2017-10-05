@@ -16,7 +16,7 @@
 const http = require('http');
 const fs = require('fs');
 const querystring = require('querystring');
-var port = 8080;
+const port = 8080;
 
 function sayHello(req, res) {
   console.log(req);
@@ -26,8 +26,6 @@ function sayHello(req, res) {
   
   res.end(); 
 }
-
-
 
 // server start 
 var server = http.createServer(sayHello);
@@ -40,14 +38,7 @@ console.log('hello' + ':' + port);
 
 
 
-
-
-
-
-
-
-
-
+// watch out for double posting or double puts. updates for those 
 
 
 // ===== W3 examples 

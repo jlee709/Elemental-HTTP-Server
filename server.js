@@ -36,11 +36,11 @@ function justinsServer(req, res) {
     case "GET":
       handlers.getRequest(req, res);
       break;
-
+    
     case "POST":
-  //  handelers.postRequest(req, res);
+      handelers.postRequest(req, res);
       break;
-
+    
     default:
       console.log('404 server error jesus christ monkey balls ');
   } 
@@ -48,9 +48,8 @@ function justinsServer(req, res) {
   //parse querystrings
   pathName = querystring.parse(req.url);
   console.log(pathName, "PATH NAME FROM Q_STRING");
+
+
 }
-
-
-
 // fs.stat(path, callback);  asks for files directories etc
 // watch out for double posting or double puts. updates for those 

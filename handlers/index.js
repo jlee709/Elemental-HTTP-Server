@@ -1,5 +1,6 @@
  // jshint esversion:6     
 const fs = require('fs');
+const path = require('path');
 // const http = require('http');
 
 function getRequest(req, res){
@@ -33,21 +34,37 @@ function getRequest(req, res){
       readUrl(hydrogenFileName, res);
       break;
 
-    case 'css/styles.css':
+    case '/css/styles.css':   // <----- check later
     //loading css styles
+      let cssFile = url.replace('/', '');
+      readUrl(cssFile, res, 'text/css');
       break;
 
     default: 
-      console.log('404 error');    
+      console.log('404 error, time for beer');
+      readUrl('404.html', res);   
   }
 }
 
-function readUrl(url, res){
-  //./public/index.html
-  fs.readFile(`./public/${url}`, function(err, data){
-    console.log(url);
+
+function postRequest(req, res, cb){
+  var url = req.url;
+  switch(url) {
+    case '':
+    break;
+  }
+}
+
+
+
+// this function reads the uri in the Url string
+function readUrl(url, res, type){
+
+  type = type || 'text/html';
+  
+  fs.readFile(path.join('public', url), function(err, data){
     res.writeHead(200, { 
-      'Content-Type': 'text/html',  
+      'Content-Type': type,  
       'Content-Length': data.toString().length
     });
     res.write(data);
@@ -55,16 +72,42 @@ function readUrl(url, res){
   });
 }
 
+// before refactor 
+// function readCss(url, res){
+  
+//   fs.readFile(path.join('public', url), function(err, data){
+//     res.writeHead(200, { 
+//       'Content-Type': 'text/css',
+//       'Content-Length': data.toString().length
+//     });
+//     res.write(data);
+//     res.end();
+//   });
+// }
 
-
-
-
-
+// elm data comes from the qs.parse
+function genElmPage(elmData){
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Elements - ${elmData.elementName}</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <h1>${elmData.elementName}</h1>
+  <h2>${elmData.elementSymbol}</h2>
+  <h3>Atomic number ${elmData.elementAtomicNumber}</h3>
+  <p>${elmData.elementDescription}</p>
+  <p><a href="/">back</a></p>
+</body>
+</html>`;
+}
 
 
 
 
 module.exports = {
-  getRequest: getRequest
-
+  getRequest: getRequest,
+  postRequest:postRequest
 };

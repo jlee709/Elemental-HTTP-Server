@@ -44,7 +44,12 @@ function justinsServer(req, res) {
     default:
       console.log('404 server error jesus christ monkey balls ');
   } 
+
+  //parse querystrings
+  pathName = querystring.parse(req.url);
+  console.log(pathName, "PATH NAME FROM Q_STRING");
 }
+
 
 
 // fs.stat(path, callback);  asks for files directories etc
